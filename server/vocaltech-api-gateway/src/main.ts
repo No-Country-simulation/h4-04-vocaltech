@@ -1,0 +1,57 @@
+import { NestFactory } from '@nestjs/core';
+import { Logger, ValidationPipe } from '@nestjs/common';
+
+import { AppModule } from './app.module';
+import { ExceptionFilter } from './common/exeptions/rpc-exception.filter';
+import { envs } from './config/envs';
+
+async function bootstrap() {
+  const logger = new Logger('Main-Gateway');
+  const app = await NestFactory.create(AppModule, {
+    rawBody: true,
+    bodyParser: true,
+  });
+  app.setGlobalPrefix('api');
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+    credentials: true,
+  });
+
+  app.useGlobalFilters(new ExceptionFilter());
+
+  await app.listen(envs.port);
+
+  logger.log(`Client-Gateway running on port ${envs.port}`);
+}
+bootstrap();
+
+/*
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+
+async function bootstrap() {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AppModule,
+    {
+      transport: Transport.TCP,
+      options: {
+        host: 'localhost',
+        port: 3000,
+      },
+    },
+  );
+  await app.listen();
+}
+bootstrap();
+*/
