@@ -4,7 +4,6 @@ import * as Joi from 'joi';
 
 interface EnvVars {
   PORT: number;
-
   USERS_MICROSERVICE_HOST: string;
   USERS_MICROSERVICE_PORT: number;
 }

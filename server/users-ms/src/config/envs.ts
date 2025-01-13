@@ -23,5 +23,5 @@ const envVars = value as EnvVars;
 export const envs = {
   userPort: envVars.USER_PORT,
   userHost: envVars.USER_HOST,
-  jwtSecret: envVars.JWT_SECRET
+  jwtSecret: envVars.JWT_SECRET,
 };
