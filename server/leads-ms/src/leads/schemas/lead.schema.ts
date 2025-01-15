@@ -11,12 +11,22 @@ export class Lead {
         trim: true
     })
     id: string;
-    @Prop()
+
+    @Prop({
+        required: true
+    })
     name: string;
-    @Prop()
+
+    @Prop({
+        required: true
+    })
     email: string;
-    @Prop()
+
+    @Prop({
+        required: true
+    })
     whatsapp: string;
+    
     @Prop({type: Respuestas})
     respuestas: Respuestas
 }
