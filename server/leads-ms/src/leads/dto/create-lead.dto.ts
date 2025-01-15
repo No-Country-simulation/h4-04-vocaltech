@@ -4,19 +4,19 @@ export class CreateLeadDto {
     email: string;
     whatsapp: string;
     respuestas: {
-        comunicacion: {
+        comunicacion?: {
             presentacionIdeas: number;
             limitaPotencial: boolean;
             desarrollarVoz: boolean;
             areasMejora: string
         };
-        mvp: {
+        mvp?: {
             tieneIdea: boolean;
             sabeValidar: boolean;
             necesitaEquipo: boolean;
             conocimientosFaltantes: string
         };
-        integracion: {
+        integracion?: {
             comoComunicar: string;
             seguroConectar: boolean;
             interesEntrenamiento: boolean
