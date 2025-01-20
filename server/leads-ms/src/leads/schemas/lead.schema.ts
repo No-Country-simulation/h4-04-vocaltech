@@ -6,13 +6,6 @@ import { Respuestas } from "./respuesta.schema";
 })
 export class Lead {
     @Prop({
-        unique: true,
-        required: true,
-        trim: true
-    })
-    id: string;
-
-    @Prop({
         required: true
     })
     name: string;
