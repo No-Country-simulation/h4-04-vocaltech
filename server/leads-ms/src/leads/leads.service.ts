@@ -17,18 +17,18 @@ export class LeadsService {
   }
 
   findAll() {
-    return "Listando";
+    return this.leadModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} lead`;
+  findOne(id: string) {
+    return this.leadModel.findById(id);
   }
 
-  update(id: number, updateLeadDto: UpdateLeadDto) {
-    return `This action updates a #${id} lead`;
+  update(id: string, updateLeadDto: UpdateLeadDto) {
+    return this.leadModel.findByIdAndUpdate(id, updateLeadDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} lead`;
+  remove(id: string) {
+    return this.leadModel.findByIdAndDelete(id);
   }
 }
