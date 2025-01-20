@@ -1,34 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { LeadsService } from './leads.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
+import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 
 @Controller('leads')
 export class LeadsController {
   constructor(private readonly leadsService: LeadsService) {}
 
-  @Post()
-  create(@Body() createLeadDto: CreateLeadDto) {
+  @MessagePattern('create_lead')
+  async createLead(@Payload() createLeadDto: CreateLeadDto) {
     return this.leadsService.create(createLeadDto);
   }
 
-  @Get()
-  findAll() {
+  @MessagePattern('find_all_leads')
+  async findAllLeads() {
     return this.leadsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.leadsService.findOne(+id);
+  @MessagePattern('find_one_lead')
+  async findOneLead(@Payload('id') id: string) {
+    return this.leadsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLeadDto: UpdateLeadDto) {
-    return this.leadsService.update(+id, updateLeadDto);
+  @MessagePattern('update_lead')
+  async updateLead(@Payload() updateLeadDto: UpdateLeadDto) {
+    return this.leadsService.update(updateLeadDto.id, updateLeadDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.leadsService.remove(+id);
+  @MessagePattern('remove_lead')
+  async removeLead(@Payload('id') id: string) {
+    if (!id) {
+      throw new RpcException('id is required');
+    }
+    return this.leadsService.remove(id);
   }
 }
