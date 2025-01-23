@@ -1,5 +1,5 @@
 # scripts
-scripts/create-admin.ts
+src/scripts/
 
 # compiled output
 /dist
