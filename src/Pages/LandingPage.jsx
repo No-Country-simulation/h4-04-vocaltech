@@ -30,7 +30,7 @@ function LandingPage() {
             </div>
 
             {/* Empresas */}
-            <div className="flex items-end gap-4 p-2 h-[108px] rounded-lg">
+            <div className="flex items-end gap-4 -p-2[0.5rem] h-[108px] rounded-lg">
               <img
                 src={empresa}
                 alt="Empresas"
@@ -47,7 +47,7 @@ function LandingPage() {
             </div>
 
             {/* Emprendedores */}
-            <div className="flex items-end gap-4 p-2 h-[108px] rounded-lg mt-4">
+            <div className="flex items-end gap-4 -p-2[0.5rem h-[108px] rounded-lg mt-4">
               <img
                 src={emprendedor}
                 alt="Emprendedores"
