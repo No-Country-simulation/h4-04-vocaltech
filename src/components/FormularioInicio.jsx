@@ -4,7 +4,7 @@ import Comunicación from "./cards/Comunicacion";
 import Tecnología from "./cards/Tecnologia";
 import Combinado from "./cards/Combinado";
 
-const LandinPages = () => {
+const FormularioInicio = () => {
     return (
         <div className="w-full max-w-5xl bg-white shadow-lg rounded-lg p-6">
             {/* Sección izquierda del encabezado */}
@@ -49,4 +49,4 @@ const LandinPages = () => {
     );
 };
 
-export default LandinPages;
+export default FormularioInicio;

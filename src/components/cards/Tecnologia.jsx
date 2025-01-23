@@ -58,7 +58,7 @@ const Tecnologia = ({ title, description }) => {
           <ul className="space-y-2 text-sm text-left w-full">
             {[
               "No sé por donde empezar a desarrollar mi producto digital.",
-              "No encuentro talento IT validado.",
+              "No encuentro talento TI validado.",
               "Busco optimizar mis procesos con soluciones digitales.",
               "Construir un MVP sólido y escalable.",
               "Evaluación de habilidades técnicas en candidatos.",
