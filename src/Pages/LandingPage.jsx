@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { MdArrowRightAlt } from "react-icons/md";
 import empresa from "../assets/images/empresa grande.png";
@@ -8,6 +9,8 @@ import CPU from "../assets/icons/CPU Bolt morado.png";
 import Round from "../assets/icons/Round Graph morado.png";
 
 function LandingPage() {
+  const navigate = useNavigate();
+  
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar Component */}
@@ -129,7 +132,10 @@ function LandingPage() {
 
         {/* Button */}
         <div className="flex justify-end w-full">
-          <button className="flex items-center gap-2 px-6 -py-4[1.5rem] text-black bg-white border border-gray-300 rounded-3xl hover:shadow-md">
+          <button
+            className="flex items-center gap-2 px-6 py-4 text-black bg-white border border-gray-300 rounded-3xl hover:shadow-md"
+            onClick={() => navigate("/formulario")} // Redirige al formulario
+          >
             <span className="font-normal text-[18px] leading-normal">
               Comenzar ahora
             </span>
