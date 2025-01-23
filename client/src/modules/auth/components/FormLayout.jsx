@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
+
 import { Carousel } from "./Carousel"; // Asegúrate de ajustar la ruta
-import image1 from "../../../assets/image1.png";
-import image2 from "../../../assets/image2.png";
+import image1 from "../../../../public/Carrusel/Group1.png";
+import image2 from "../../../../public/Carrusel/Rectangle.png";
 
 
 export const FormLayout = ({ form }) => {

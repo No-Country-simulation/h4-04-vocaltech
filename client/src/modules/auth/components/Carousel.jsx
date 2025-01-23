@@ -14,7 +14,7 @@ export const Carousel = ({ images }) => {
   }, [images.length]);
 
   return (
-    <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
+    <div className="relative w-full max-w-[90%] h-[110vh] overflow-hidden flex items-center justify-center mx-auto">
       <div
         className="flex transition-transform duration-1000 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -24,7 +24,7 @@ export const Carousel = ({ images }) => {
             key={index}
             src={image}
             alt={`Slide ${index}`}
-            className="w-full h-auto max-h-[90%] object-contain flex-shrink-0"
+            className="max-w-full max-h-full object-contain flex-shrink-0"
           />
         ))}
       </div>
