@@ -51,13 +51,13 @@ const SingIn = () => {
     };
 
     return (
-        <div className="flex flex-col-reverse w-screen h-screen md:flex-row">
+        <div className="flex flex-col-reverse w-screen h-screen md:flex-row overflow-hidden">
             {/* Left Section */}
-            <div className="relative flex items-center justify-center w-full md:w-1/2">
+            <div className="relative flex items-center justify-center w-full md:w-1/2 mt-5">
                 {/* Regresar Arrow */}
                 <a
                     href="#"
-                    className="absolute top-10 left-10 gap-4 flex items-center text-[26px] font-medium"
+                    className="absolute top-1 left-10 gap-4 flex items-center text-[26px] font-medium"
                 >
                     <svg
                         width="26"
@@ -74,7 +74,7 @@ const SingIn = () => {
                     Regresar
                 </a>
 
-                <div className="w-[600px] h-[800px] p-8 mt-40">
+                <div className="w-[600px] h-[800px] p-8 mt-60 ml-10">
                     <div className="flex mb-6">
                         <img src="/VocalTech.png" alt="VolcaTech" />
                     </div>
