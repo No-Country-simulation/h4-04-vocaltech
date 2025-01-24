@@ -8,6 +8,7 @@ interface EnvVars {
   DIAGNOSES_PORT: number;
   DIAGNOSES_HOST: string;
   JWT_SECRET: string;
+  MONGO_URL: string;
 }
 
 const envSchema = Joi.object({
@@ -30,4 +31,5 @@ export const envs = {
   diagnosesPort: envVars.DIAGNOSES_PORT,
   diagnosesHost: envVars.DIAGNOSES_HOST,
   jwtSecret: envVars.JWT_SECRET,
+  dbUrl: envVars.MONGO_URL,
 };

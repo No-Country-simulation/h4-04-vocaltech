@@ -1,34 +1,58 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { DiagnosesService } from './diagnoses.service';
-import { CreateDiagnosisDto } from './dto/create-diagnosis.dto';
+import { CreateDiagnosesDto } from './dto/create-diagnosis.dto';
 import { UpdateDiagnosisDto } from './dto/update-diagnosis.dto';
+import { DiagnosesDocument } from './entities/diagnoses.entity';
 
 @Controller('diagnoses')
 export class DiagnosesController {
   constructor(private readonly diagnosesService: DiagnosesService) {}
 
-  @Post()
-  create(@Body() createDiagnosisDto: CreateDiagnosisDto) {
-    return this.diagnosesService.create(createDiagnosisDto);
-  }
-
-  @Get()
-  findAll() {
+  @MessagePattern('find_all_diagnoses')
+  async findAll() {
     return this.diagnosesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.diagnosesService.findOne(+id);
+  @MessagePattern('find_one_diagnosis')
+  async findOne(@Payload('id') id: string) {
+    if (!id) {
+      throw new RpcException('id is required');
+    }
+    return this.diagnosesService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDiagnosisDto: UpdateDiagnosisDto) {
-    return this.diagnosesService.update(+id, updateDiagnosisDto);
+  @MessagePattern('create_diagnosis')
+  async create(
+    @Payload() createDiagnosesDto: CreateDiagnosesDto,
+  ): Promise<DiagnosesDocument> {
+    return this.diagnosesService.create(createDiagnosesDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.diagnosesService.remove(+id);
+  @MessagePattern('update_diagnosis')
+  async update(
+    @Payload() updateDiagnosisDto: UpdateDiagnosisDto,
+  ): Promise<DiagnosesDocument> {
+    const { id, ...updateData } = updateDiagnosisDto;
+    if (!id) {
+      throw new RpcException('id is required');
+    }
+    return this.diagnosesService.update(id, updateData);
+  }
+
+  @MessagePattern('delete_diagnosis')
+  async remove(@Payload('id') id: string): Promise<DiagnosesDocument> {
+    if (!id) {
+      throw new RpcException('id is required');
+    }
+    return this.diagnosesService.delete(id);
   }
 }

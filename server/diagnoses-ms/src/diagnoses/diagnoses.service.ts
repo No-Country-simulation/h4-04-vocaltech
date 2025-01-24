@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDiagnosisDto } from './dto/create-diagnosis.dto';
-import { UpdateDiagnosisDto } from './dto/update-diagnosis.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Diagnoses, DiagnosesDocument } from './entities/diagnoses.entity';
+import { CreateDiagnosesDto } from './dto/create-diagnosis.dto';
 
 @Injectable()
 export class DiagnosesService {
-  create(createDiagnosisDto: CreateDiagnosisDto) {
-    return 'This action adds a new diagnosis';
+  constructor(
+    @InjectModel(Diagnoses.name)
+    private diagnosesModel: Model<DiagnosesDocument>,
+  ) {}
+
+  async create(
+    createDiagnosesDto: CreateDiagnosesDto,
+  ): Promise<DiagnosesDocument> {
+    const createdDiagnoses = new this.diagnosesModel(createDiagnosesDto);
+    return createdDiagnoses.save();
   }
 
-  findAll() {
-    return `This action returns all diagnoses`;
+  async update(id: string, updateData: any): Promise<DiagnosesDocument> {
+    return this.diagnosesModel.findByIdAndUpdate(id, updateData, { new: true });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} diagnosis`;
+  async delete(id: string): Promise<DiagnosesDocument> {
+    return this.diagnosesModel.findByIdAndDelete(id);
   }
 
-  update(id: number, updateDiagnosisDto: UpdateDiagnosisDto) {
-    return `This action updates a #${id} diagnosis`;
+  async findAll(): Promise<DiagnosesDocument[]> {
+    return this.diagnosesModel.find();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} diagnosis`;
+  async findOne(id: string): Promise<DiagnosesDocument> {
+    return this.diagnosesModel.findById(id);
   }
 }
