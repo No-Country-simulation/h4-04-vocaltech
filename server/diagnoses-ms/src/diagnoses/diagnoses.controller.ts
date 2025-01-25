@@ -22,11 +22,13 @@ export class DiagnosesController {
     return this.diagnosesService.findAll();
   }
 
-  @MessagePattern('find_one_diagnosis')
-  async findOne(@Payload('id') id: string) {
+  @MessagePattern('find_one_diagnoses')
+  async findOne(@Payload('id') id: string): Promise<DiagnosesDocument> {
+    console.log('Microservicio recibió ID:', id);
     if (!id) {
-      throw new RpcException('id is required');
+      throw new RpcException('id is required for findOne');
     }
+    console.log('findOne', id);
     return this.diagnosesService.findOne(id);
   }
 

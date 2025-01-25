@@ -11,7 +11,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { ClientProxy, Payload, RpcException } from '@nestjs/microservices';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdateDiagnosisDto } from '../dto/update-diagnosis.dto';
@@ -26,10 +26,14 @@ export class DiagnosesController {
   findAllDiagnoses(@Query() paginationDto: PaginationDto) {
     return this.diagnosesClient.send('find_all_diagnoses', paginationDto);
   }
-  @Get('findOne')
-  findOneDiagnosis(@Query('id') id: string) {
+  @Get('findOne/:id')
+  findOneDiagnosis(@Param('id') id: string) {
+    console.log('ID recibido en el Gateway:', id);
     try {
-      return this.diagnosesClient.send('find_one_diagnosis', id);
+      if (!id) {
+        throw new RpcException('id is required for findOne');
+      }
+      return this.diagnosesClient.send('find_one_diagnoses', { id });
     } catch (error) {
       throw new RpcException(error);
     }
@@ -45,7 +49,7 @@ export class DiagnosesController {
 
   @Patch('patch/:id')
   async updateDiagnosis(
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param('id') id: string,
     @Body() updateDiagnosisDto: UpdateDiagnosisDto,
   ) {
     try {
@@ -62,12 +66,12 @@ export class DiagnosesController {
   }
 
   @Delete('delete/:id')
-  removeDiagnosis(@Param('id', ParseUUIDPipe) id: string) {
+  removeDiagnosis(@Param('id') id: string) {
     if (!id) {
       throw new RpcException('id is required');
     }
 
-    // console.log('Deleting diagnosis with ID:', id);
+    console.log('Deleting diagnosis with ID:', id);
 
     return this.diagnosesClient.send('delete_diagnosis', { id }).pipe(
       catchError((err) => {
