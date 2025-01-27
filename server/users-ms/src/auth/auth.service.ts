@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { PrismaClient, User } from '@prisma/client';
-import { UserService } from 'src/users/users.service';
+import { UserService } from '../users/users.service';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 

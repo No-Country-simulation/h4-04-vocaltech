@@ -20,6 +20,14 @@ export class CreateUserDto {
   @IsNotEmpty()
   public name: string;
 
+  @IsOptional()
+  @IsString()
+  public leadId: string;
+
+  @IsOptional()
+  @IsString()
+  public organizationId: string;
+
   @IsEnum(UserRole)
   public role: UserRole;
 }
