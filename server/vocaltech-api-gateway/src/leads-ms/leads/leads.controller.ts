@@ -21,7 +21,8 @@ export class LeadsController {
 
     @Get('findAll')
     findAllLeads() {
-        return this.leadClient.send('find_all_leads', {});
+        const leads = this.leadClient.send('find_all_leads', {});
+        return leads;
     }
 
     @Get('findOne')
