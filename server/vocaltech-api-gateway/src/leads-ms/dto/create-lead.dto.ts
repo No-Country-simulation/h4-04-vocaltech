@@ -1,9 +1,19 @@
+import { IsString, IsBoolean, IsOptional, IsNumber, ValidateNested, IsNotEmpty, IsEmail } from 'class-validator';
+
 export class CreateLeadDto {
-    id: string;
-    name: string;
-    email: string;
-    whatsapp: string;
-    respuestas: {
+    @IsString()
+    public name: string;
+    
+    @IsString()
+    @IsNotEmpty()
+    @IsEmail()
+    public email: string;
+
+    @IsString()
+    @IsNotEmpty()
+    public whatsapp: string;
+
+    public respuestas: {
         comunicacion?: {
             presentacionIdeas: number;
             limitaPotencial: boolean;
