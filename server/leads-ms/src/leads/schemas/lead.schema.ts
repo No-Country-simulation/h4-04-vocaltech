@@ -19,6 +19,12 @@ export class Lead {
         required: true
     })
     whatsapp: string;
+
+    @Prop()
+    ubicacion: string;
+
+    @Prop()
+    sector_actividad: string;
     
     @Prop({type: Respuestas})
     respuestas: Respuestas
