@@ -73,11 +73,6 @@ const Combinado = ({ title, description }) => {
               </li>
             ))}
           </ul>
-          <button
-            className="relative z-10 flex h-[40px] px-6 py-[8px] justify-center items-center gap-[8px] rounded-full bg-gradient-to-r from-[#6A11CB] to-[#2575FC] text-white font-bold text-sm mx-auto mt-4 shadow-lg"
-          >
-            Continuar al diagnóstico
-          </button>
         </div>
       )}
     </div>
