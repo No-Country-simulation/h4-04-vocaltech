@@ -16,7 +16,7 @@ export class AuthController {
   }
   @Get('validate_token/:token')
   validateToken(@Param('token') token: string) {
-    console.log('Gateway: Validando token');
+    console.log('Gateway: Validando token ahora');
     return this.authClient.send('validate_token', token);
   }
 }
