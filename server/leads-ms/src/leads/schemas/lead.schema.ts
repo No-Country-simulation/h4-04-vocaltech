@@ -8,7 +8,13 @@ export class Lead {
     @Prop({
         required: true
     })
-    name: string;
+    nombre: string;
+
+    //Solo para Emprendedor
+    @Prop()
+    tiempo: string;
+    @Prop()
+    etapa: string;
 
     @Prop({
         required: true
@@ -18,10 +24,14 @@ export class Lead {
     @Prop({
         required: true
     })
-    whatsapp: string;
+    celular: string;
 
+    //Solo para Empresa
     @Prop()
     ubicacion: string;
+
+    @Prop()
+    redes: string;
 
     @Prop()
     sector_actividad: string;
