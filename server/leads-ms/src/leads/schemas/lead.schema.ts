@@ -29,6 +29,8 @@ export class Lead {
     //Solo para Empresa
     @Prop()
     ubicacion: string;
+    @Prop()
+    empleados: string;
 
     @Prop()
     redes: string;

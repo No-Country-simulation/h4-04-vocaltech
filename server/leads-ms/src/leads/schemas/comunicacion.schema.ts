@@ -19,4 +19,12 @@ export class Comunicacion {
     mayor_desafio: string;
 
     //Empresa
+    @Prop()
+    comunicacion_interna: string;
+    @Prop()
+    desafios: string;
+    @Prop()
+    mejorar_habilidades: string;
+    @Prop()
+    impacto: string;
 }
