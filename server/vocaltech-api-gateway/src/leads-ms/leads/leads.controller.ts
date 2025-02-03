@@ -28,7 +28,7 @@ export class LeadsController {
     @Get('findOne')
     findOneLead(@Query('id') id:string) {
         try {
-            return this.leadClient.send('find_one_lead', id);
+            return this.leadClient.send('find_one_lead', { id });
         } catch (error) {
             throw new RpcException(error);
         }
