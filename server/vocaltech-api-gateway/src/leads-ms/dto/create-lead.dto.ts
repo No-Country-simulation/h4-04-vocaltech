@@ -6,6 +6,14 @@ export class CreateLeadDto {
     @IsString()
     @IsNotEmpty()
     public name: string;
+
+    @IsString()
+    @IsOptional()
+    public etapa: string;
+
+    @IsString()
+    @IsOptional()
+    public tiempo: string;
     
     @IsString()
     @IsNotEmpty()
@@ -17,10 +25,22 @@ export class CreateLeadDto {
     public whatsapp: string;
 
     @IsString()
+    @IsOptional()
     public ubicacion: string;
+
+    @IsString()
+    @IsOptional()
+    public empleados: string;
+
+    @IsString()
+    public redes: string;
     
     @IsString()
     public sector_actividad: string;
+
+    @IsString()
+    @IsNotEmpty()
+    public categoria: string;
 
     @ValidateNested()
     @Type(() => CreateLeadRespuestasDto)
