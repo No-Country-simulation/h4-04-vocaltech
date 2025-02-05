@@ -1,7 +1,7 @@
 import { Prop, Schema } from "@nestjs/mongoose";
 import { MejorarPitch } from "./mejorar-pitch.schema";
 
-@Schema()
+@Schema({_id: false})
 export class Pitch {
     //Emprendedor
     @Prop()

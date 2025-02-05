@@ -1,6 +1,6 @@
 import { Schema, Prop } from "@nestjs/mongoose";
 
-@Schema()
+@Schema({_id: false})
 export class MejorarPitch {
     @Prop()
     claridad: number;

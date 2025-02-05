@@ -8,7 +8,7 @@ export class Lead {
     @Prop({
         required: true
     })
-    nombre: string;
+    name: string;
 
     //Solo para Emprendedor
     @Prop()
@@ -24,7 +24,7 @@ export class Lead {
     @Prop({
         required: true
     })
-    celular: string;
+    whatsapp: string;
 
     //Solo para Empresa
     @Prop()
@@ -37,6 +37,11 @@ export class Lead {
 
     @Prop()
     sector_actividad: string;
+
+    @Prop({
+        required: true
+    })
+    categoria: string;
     
     @Prop({type: Respuestas})
     respuestas: Respuestas

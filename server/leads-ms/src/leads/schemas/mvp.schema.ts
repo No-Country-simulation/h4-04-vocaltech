@@ -1,6 +1,6 @@
 import { Schema, Prop } from "@nestjs/mongoose";
 
-@Schema()
+@Schema({_id: false})
 export class Mvp {
     @Prop()
     desarrollar_mvp: string
