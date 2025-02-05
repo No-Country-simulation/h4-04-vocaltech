@@ -6,6 +6,11 @@ import { MdArrowRightAlt } from "react-icons/md";
 const Servicios = () => {
     return (
         <section id="servicios" className="py-16 text-center bg-white">
+            {/* TÍTULO PRINCIPAL */}
+            <p className="text-[#9A9A9A] text-center font-dm-sans text-[20px] font-normal leading-normal mb-6">
+                SERVICIOS
+            </p>
+            
             {/* TÍTULO H2 */}
             <h2 className="text-black text-center font-dm-sans text-[48px] font-bold leading-none max-w-[613px] mx-auto">
                 <span className="block">Cómo podemos ayudarte</span>
@@ -19,7 +24,6 @@ const Servicios = () => {
                     <MdArrowRightAlt className="w-6 h-6 relative top-[2px]" />
                 </p>
             </div>
-
 
             {/* TARJETAS */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[49px] mt-6 px-6 md:px-16">

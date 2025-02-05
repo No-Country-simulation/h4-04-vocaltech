@@ -4,8 +4,8 @@ import img3 from "../assets/icons/Step Symbol.png"; // Ícono del paso 3
 
 const ProgressBar = () => {
   return (
-    <div className="flex justify-center items-center mt-8">
-      <div className="flex items-center">
+    <div className="flex justify-center items-center mt-8 overflow-x-auto">
+      <div className="flex items-center min-w-[320px] md:min-w-[500px] lg:min-w-[600px]">
         {/* Paso 1 */}
         <div className="relative flex flex-col items-center">
           {/* Círculo azul con el check */}

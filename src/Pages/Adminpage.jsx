@@ -1,11 +1,11 @@
-import Paneladmin from "../components/Paneladmin"
+import PanelAdministracion from "../components/panelAdministracion";
 
-const Adminpage= () => {
+const Adminpage = () => {
   return (
     <div>
-    <Paneladmin />
+      <PanelAdministracion />
     </div>
-  ); 
+  );
 };
 
 export default Adminpage;

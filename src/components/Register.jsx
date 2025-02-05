@@ -5,6 +5,7 @@ import Image1 from "../assets/Rectangle.png";
 import Image2 from "../assets/Group1.png";
 import Image3 from "../assets/image.png";
 import vocal from "../assets/VocalTech.png";
+import useRegisterUser from "../hooks/useRegister";
 
 const images = [Image2, Image1, Image3];
 
@@ -18,6 +19,7 @@ const Register = () => {
         confirmPassword: ""
     });
     const [errors, setErrors] = useState({});
+    const { handleRegister, loading, error, success } = useRegisterUser();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -41,16 +43,19 @@ const Register = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
-            console.log("Formulario enviado:", formData);
+            await handleRegister({
+                name: formData.name,
+                email: formData.email,
+                password: formData.password
+            });
         }
     };
 
     return (
         <div className="flex w-[1440px] h-[1024px] overflow-hidden">
-            {/* Left Section */}
             <div className="relative flex flex-col items-start justify-center w-full md:w-1/2 px-16">
                 <a
                     href="#"
@@ -83,15 +88,22 @@ const Register = () => {
                             <input type="password" id="password" placeholder="*********" className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#6A11CB] focus:outline-none" value={formData.password} onChange={handleInputChange} />
                             {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
                         </div>
-                        <button type="submit" className="w-full py-3 text-[16px] text-white font-medium rounded-full bg-gradient-to-r from-[#6A11CB] to-[#2575FC] hover:opacity-90">Crear Cuenta</button>
+                        <div>
+                            <label htmlFor="confirmPassword" className="block text-[18px] font-medium">Confirmar Contraseña</label>
+                            <input type="password" id="confirmPassword" placeholder="*********" className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#6A11CB] focus:outline-none" value={formData.confirmPassword} onChange={handleInputChange} />
+                            {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>}
+                        </div>
+                        <button type="submit" className="w-full py-3 text-[16px] text-white font-medium rounded-full bg-gradient-to-r from-[#6A11CB] to-[#2575FC] hover:opacity-90" disabled={loading}>
+                            {loading ? "Registrando..." : "Crear Cuenta"}
+                        </button>
+                        {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+                        {success && <p className="mt-2 text-sm text-green-500">{success}</p>}
                     </form>
                     <p className="mt-10 text-sm text-center">
                         ¿Ya tienes una cuenta? <a href="/login" className="text-[#6A11CB] hover:underline">Ingresar</a>
                     </p>
                 </div>
             </div>
-
-            {/* Right Section with Carousel */}
             <div className="relative hidden w-full md:w-1/2 md:block items-center justify-center bg-transparent">
                 <div className="relative w-[80%] h-[73%] overflow-hidden rounded-lg shadow-lg bg-transparent">
                     <img src={images[currentIndex]} alt={`Slide ${currentIndex + 1}`} className="object-cover w-full h-full bg-transparent" />

@@ -43,7 +43,7 @@ const Comunicacion = ({ title, description }) => {
             />
           </div>
           {/* Franja gris */}
-          <div className="absolute bottom-0 w-full bg-gray-400 bg-opacity-50 px-4 py-2">
+          <div className="absolute bottom-0 w-full bg-gray-400 bg-opacity-50 px-4 py-0">
             <p className="text-lg font-bold text-blanco font-manrope">
               {description}
             </p>
