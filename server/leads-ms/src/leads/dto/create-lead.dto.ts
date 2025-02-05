@@ -8,9 +8,11 @@ export class CreateLeadDto {
     public name: string;
 
     @IsString()
+    @IsOptional()
     public etapa: string;
 
     @IsString()
+    @IsOptional()
     public tiempo: string;
 
     @IsString()

@@ -2,10 +2,10 @@ import { IsString, IsOptional, IsNotEmpty } from "class-validator"
 
 export class ComunicacionDto {
 
-    //Emprendedor
     @IsString()
     @IsNotEmpty()
     public capacidad_comunicar: string;
+    //Emprendedor
     @IsString()
     @IsOptional()
     public importancia_comunicacion_ventas: string;
