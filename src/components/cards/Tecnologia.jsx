@@ -39,7 +39,7 @@ const Tecnologia = ({ title, description }) => {
             />
           </div>
           <div className="absolute bottom-0 w-full bg-gray-400 bg-opacity-50 px-4 py-2">
-            <p className="text-sm font-bold text-white">{description}</p>
+            <p className="text-sm font-bold text-white font-manrope">{description}</p>
           </div>
         </>
       ) : (
