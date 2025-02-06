@@ -4,6 +4,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { ExceptionFilter } from './common/exeptions/rpc-exception.filter';
 import { envs } from './config/envs';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const logger = new Logger('Main-Gateway');
@@ -28,6 +29,15 @@ async function bootstrap() {
   });
 
   app.useGlobalFilters(new ExceptionFilter());
+
+  const config = new DocumentBuilder()
+    .setTitle('Vocaltech')
+    .setDescription('The VocalTech API description')
+    .setVersion('1.0')
+    .build();
+  
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger', app, documentFactory);
 
   await app.listen(envs.port);
 
