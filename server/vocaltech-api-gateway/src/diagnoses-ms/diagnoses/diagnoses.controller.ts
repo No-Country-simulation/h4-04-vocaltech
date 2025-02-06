@@ -16,16 +16,24 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdateDiagnosisDto } from '../dto/update-diagnosis.dto';
 import { CreateDiagnosesDto } from '../dto/create-diagnoses.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Diagnoses')
 @Controller('diagnoses')
 export class DiagnosesController {
   constructor(
     @Inject('DIAGNOSES_SERVICE') private readonly diagnosesClient: ClientProxy,
   ) {}
+
+  @ApiOperation({ summary: 'Get all diagnoses' })
+  @ApiResponse({ status: 200, description: 'Returns all diagnoses' })
   @Get('findAll')
   findAllDiagnoses(@Query() paginationDto: PaginationDto) {
     return this.diagnosesClient.send('find_all_diagnoses', paginationDto);
   }
+
+  @ApiOperation({ summary: 'Get one diagnosis' })
+  @ApiResponse({ status: 200, description: 'Returns one diagnosis' })
   @Get('findOne/:id')
   findOneDiagnosis(@Param('id') id: string) {
     console.log('ID recibido en el Gateway:', id);
@@ -38,6 +46,9 @@ export class DiagnosesController {
       throw new RpcException(error);
     }
   }
+
+  @ApiOperation({ summary: 'Creation a diagnosis' })
+  @ApiResponse({ status: 201, description: 'Diagnosis created successfully' })
   @Post('create')
   createDiagnosis(@Body() diagnosisData: CreateDiagnosesDto) {
     try {
@@ -47,6 +58,8 @@ export class DiagnosesController {
     }
   }
 
+  @ApiOperation({ summary: 'Update a diagnosis' })
+  @ApiResponse({ status: 200, description: 'Update one diagnosis' })
   @Patch('patch/:id')
   async updateDiagnosis(
     @Param('id') id: string,
@@ -65,6 +78,8 @@ export class DiagnosesController {
     }
   }
 
+  @ApiOperation({ summary: 'Delete a diagnosis' })
+  @ApiResponse({ status: 200, description: 'Deleted diagnosis successfully' })
   @Delete('delete/:id')
   removeDiagnosis(@Param('id') id: string) {
     if (!id) {
