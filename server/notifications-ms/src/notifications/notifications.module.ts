@@ -1,7 +1,8 @@
-/*
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { NotificationsService } from './notifications.service';
+import { ConfigModule } from '@nestjs/config';
+import { EmailService } from './email.service';
+import { WhatsAppService } from './whatsapp.service';
 import { NotificationsController } from './notifications.controller';
 import {
   Notifications,
@@ -10,13 +11,13 @@ import {
 
 @Module({
   imports: [
+    ConfigModule, // Para acceder a las variables de entorno
     MongooseModule.forFeature([
       { name: Notifications.name, schema: NotificationsSchema },
     ]),
   ],
   controllers: [NotificationsController],
-  providers: [NotificationsService],
-  exports: [MongooseModule],
+  providers: [EmailService, WhatsAppService],
+  exports: [EmailService, WhatsAppService],
 })
 export class NotificationsModule {}
-*/

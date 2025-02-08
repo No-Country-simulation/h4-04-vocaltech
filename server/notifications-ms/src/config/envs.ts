@@ -12,6 +12,11 @@ interface EnvVars {
   JWT_SECRET: string;
   MONGO_URL: string;
   MONGO_NOTIFICATIONS_URL: string;
+  TWILIO_ACCOUNT_SID: string;
+  TWILIO_AUTH_TOKEN: string;
+  TWILIO_PHONE_NUMBER: string;
+  SEND_GRID_API_KEY: string;
+  SEND_GRID_FROM_EMAIL: string;
 }
 
 const envSchema = Joi.object({
@@ -40,4 +45,9 @@ export const envs = {
   jwtSecret: envVars.JWT_SECRET,
   dbUrl: envVars.MONGO_URL,
   notificationsDbUrl: envVars.MONGO_NOTIFICATIONS_URL,
+  twilioAccountSid: envVars.TWILIO_ACCOUNT_SID,
+  twilioAuthToken: envVars.TWILIO_AUTH_TOKEN,
+  twilioPhoneNumber: envVars.TWILIO_PHONE_NUMBER,
+  sendGridApiKey: envVars.SEND_GRID_API_KEY,
+  sendGridFromEmail: envVars.SEND_GRID_FROM_EMAIL,
 };

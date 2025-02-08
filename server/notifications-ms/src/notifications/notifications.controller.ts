@@ -1,34 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { NotificationsService } from './notifications.service';
-import { CreateNotificationDto } from './dto/create-notification.dto';
-import { UpdateNotificationDto } from './dto/update-notification.dto';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
+import { SendNotificationDto } from './dto/create-notification.dto';
+import { WhatsAppService } from './whatsapp.service';
+import { EmailService } from './email.service';
 
 @Controller('notifications')
 export class NotificationsController {
-  constructor(private readonly notificationsService: NotificationsService) {}
+  constructor(
+    private readonly whatsappService: WhatsAppService,
+    private readonly emailService: EmailService,
+  ) {}
 
-  @Post()
-  create(@Body() createNotificationDto: CreateNotificationDto) {
-    return this.notificationsService.create(createNotificationDto);
-  }
+  @MessagePattern('send_notification')
+  async sendNotification(data: SendNotificationDto) {
+    const { email, phoneNumber, message } = data;
 
-  @Get()
-  findAll() {
-    return this.notificationsService.findAll();
-  }
+    if (phoneNumber) {
+      await this.whatsappService.sendWhatsAppMessage(phoneNumber, message);
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.notificationsService.findOne(+id);
-  }
+    if (email) {
+      await this.emailService.sendEmail(
+        email,
+        'Diagnóstico de VocalTech',
+        message,
+      );
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNotificationDto: UpdateNotificationDto) {
-    return this.notificationsService.update(+id, updateNotificationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.notificationsService.remove(+id);
+    return { status: 'Notification sent' };
   }
 }
