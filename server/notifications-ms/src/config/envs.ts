@@ -12,11 +12,11 @@ interface EnvVars {
   JWT_SECRET: string;
   MONGO_URL: string;
   MONGO_NOTIFICATIONS_URL: string;
-  TWILIO_ACCOUNT_SID: string;
-  TWILIO_AUTH_TOKEN: string;
-  TWILIO_PHONE_NUMBER: string;
+  DIALOG_API_KEY: string;
   SEND_GRID_API_KEY: string;
   SEND_GRID_FROM_EMAIL: string;
+  PHONE_NUMBER_ID: string;
+  WHATSAPP_TOKEN: string;
 }
 
 const envSchema = Joi.object({
@@ -27,6 +27,8 @@ const envSchema = Joi.object({
   NOTIFICATIONS_PORT: Joi.number().required(),
   NOTIFICATIONS_HOST: Joi.string().required(),
   JWT_SECRET: Joi.string().required(),
+  PHONE_NUMBER_ID: Joi.string().required(),
+  WHATSAPP_TOKEN: Joi.string().required(),
 }).unknown(true);
 
 const { error, value } = envSchema.validate(process.env);
@@ -45,9 +47,8 @@ export const envs = {
   jwtSecret: envVars.JWT_SECRET,
   dbUrl: envVars.MONGO_URL,
   notificationsDbUrl: envVars.MONGO_NOTIFICATIONS_URL,
-  twilioAccountSid: envVars.TWILIO_ACCOUNT_SID,
-  twilioAuthToken: envVars.TWILIO_AUTH_TOKEN,
-  twilioPhoneNumber: envVars.TWILIO_PHONE_NUMBER,
   sendGridApiKey: envVars.SEND_GRID_API_KEY,
   sendGridFromEmail: envVars.SEND_GRID_FROM_EMAIL,
+  phoneNumberId: envVars.PHONE_NUMBER_ID,
+  whatsappToken: envVars.WHATSAPP_TOKEN,
 };

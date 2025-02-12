@@ -36,4 +36,19 @@ export class NotificationsController {
       throw new RpcException(error);
     }
   }
+  @Post('sendWhatsAppMessage')
+  async sendWhatsAppMessage(@Body() data: SendNotificationDto) {
+    const { phoneNumber, message } = data;
+    try {
+      const result = await firstValueFrom(
+        this.notificationClient.send('send_whatsapp_message', {
+          phoneNumber,
+          message,
+        }),
+      );
+      return result;
+    } catch (error) {
+      throw new RpcException(error);
+    }
+  }
 }
