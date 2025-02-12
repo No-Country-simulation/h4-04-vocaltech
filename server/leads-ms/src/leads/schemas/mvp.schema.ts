@@ -3,11 +3,22 @@ import { Schema, Prop } from "@nestjs/mongoose";
 @Schema({_id: false})
 export class Mvp {
     @Prop()
-    tieneIdea: boolean;
+    desarrollar_mvp: string
     @Prop()
-    sabeValidar: boolean;
+	etapa: string
+
+    //Emprendedor
     @Prop()
-    necesitaEquipo: boolean;
+	validado: string
     @Prop()
-    conocimientosFaltantes: string
+	problema_mvp: string
+
+    //Empresa
+    @Prop()
+    validar_ideas: string;
+    @Prop()
+    asesoramiento: string;
+
+    @Prop()
+	mayor_dificultad: string
 }

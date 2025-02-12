@@ -16,16 +16,24 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { CreateUserDto } from '../dto/create-user.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(
     @Inject('USER_SERVICE') private readonly userClient: ClientProxy,
   ) {}
+
+  @ApiOperation({ summary: 'Get all users' })
+  @ApiResponse({ status: 200, description: 'Returns all users' })
   @Get('findAll')
   findAllUsers(@Query() paginationDto: PaginationDto) {
     return this.userClient.send('find_all_users', paginationDto);
   }
+
+  @ApiOperation({ summary: 'Get user by email' })
+  @ApiResponse({ status: 200, description: 'Returns user by email' })
   @Get('findOneByEmail')
   findOneByEmail(@Query('email') email: string) {
     try {
@@ -34,6 +42,9 @@ export class UsersController {
       throw new RpcException(error);
     }
   }
+
+  @ApiOperation({ summary: 'Get one user' })
+  @ApiResponse({ status: 200, description: 'Returns one user' })
   @Get('findOne')
   findOneUser(@Query('id') id: string) {
     try {
@@ -43,6 +54,8 @@ export class UsersController {
     }
   }
 
+  @ApiOperation({ summary: 'Creation a new user' })
+  @ApiResponse({ status: 201, description: 'User created successfully' })
   @Post('create')
   createUser(@Body() userData: CreateUserDto) {
     try {
@@ -51,6 +64,9 @@ export class UsersController {
       throw new RpcException(error);
     }
   }
+
+  @ApiOperation({ summary: 'Update a user' })
+  @ApiResponse({ status: 200, description: 'Update one user' })
   @Patch('patch/:id')
   async updateUser(
     @Param('id', ParseUUIDPipe) id: string,
@@ -66,6 +82,8 @@ export class UsersController {
     }
   }
 
+  @ApiOperation({ summary: 'Delete a user' })
+  @ApiResponse({ status: 200, description: 'Deleted user successfully' })
   @Delete('delete/:id')
   removeUser(@Param('id', ParseUUIDPipe) id: string) {
     if (!id) {

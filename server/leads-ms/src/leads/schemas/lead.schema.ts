@@ -10,6 +10,12 @@ export class Lead {
     })
     name: string;
 
+    //Solo para Emprendedor
+    @Prop()
+    tiempo: string;
+    @Prop()
+    etapa: string;
+
     @Prop({
         required: true
     })
@@ -19,6 +25,23 @@ export class Lead {
         required: true
     })
     whatsapp: string;
+
+    //Solo para Empresa
+    @Prop()
+    ubicacion: string;
+    @Prop()
+    empleados: string;
+
+    @Prop()
+    redes: string;
+
+    @Prop()
+    sector_actividad: string;
+
+    @Prop({
+        required: true
+    })
+    categoria: string;
     
     @Prop({type: Respuestas})
     respuestas: Respuestas

@@ -5,7 +5,7 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from '@prisma/client';
 
-@Controller()
+@Controller('auth')
 export class AuthController {
   httpService: any;
   constructor(private readonly authService: AuthService) {}

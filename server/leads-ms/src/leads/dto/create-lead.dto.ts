@@ -1,25 +1,48 @@
+import { IsString, IsBoolean, IsOptional, IsNumber, ValidateNested, IsNotEmpty, IsEmail } from 'class-validator';
+import { Type } from 'class-transformer';
+import { CreateLeadRespuestasDto } from './create-lead-respuestas.dto';
+
 export class CreateLeadDto {
-    id: string;
-    name: string;
-    email: string;
-    whatsapp: string;
-    respuestas: {
-        comunicacion?: {
-            presentacionIdeas: number;
-            limitaPotencial: boolean;
-            desarrollarVoz: boolean;
-            areasMejora: string
-        };
-        mvp?: {
-            tieneIdea: boolean;
-            sabeValidar: boolean;
-            necesitaEquipo: boolean;
-            conocimientosFaltantes: string
-        };
-        integracion?: {
-            comoComunicar: string;
-            seguroConectar: boolean;
-            interesEntrenamiento: boolean
-        }
-    }
+    @IsString()
+    @IsNotEmpty()
+    public name: string;
+
+    @IsString()
+    @IsOptional()
+    public etapa: string;
+
+    @IsString()
+    @IsOptional()
+    public tiempo: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @IsEmail()
+    public email: string;
+
+    @IsString()
+    @IsNotEmpty()
+    public whatsapp: string;
+
+    @IsString()
+    @IsOptional()
+    public ubicacion: string;
+
+    @IsString()
+    @IsOptional()
+    public empleados: string;
+
+    @IsString()
+    public redes: string;
+    
+    @IsString()
+    public sector_actividad: string;
+
+    @IsString()
+    @IsNotEmpty()
+    public categoria: string;
+    
+    @ValidateNested()
+    @Type(() => CreateLeadRespuestasDto)
+    respuestas: CreateLeadRespuestasDto;
 }

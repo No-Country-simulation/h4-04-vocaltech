@@ -33,7 +33,7 @@ model User {
   email          String          @unique
   password       String
   name           String
-  role           UserRole        @default(USER)
+  role           UserRole?       @default(USER)
   leadId         String? // Relación opcional con un lead
   organizationId String? // ID de la organización (opcional)
   createdAt      DateTime        @default(now())
