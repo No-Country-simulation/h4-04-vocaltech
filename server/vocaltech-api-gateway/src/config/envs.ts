@@ -10,6 +10,8 @@ interface EnvVars {
   LEADS_MICROSERVICE_PORT: number;
   DIAGNOSES_MICROSERVICE_HOST: string;
   DIAGNOSES_MICROSERVICE_PORT: number;
+  NOTIFICATIONS_MICROSERVICE_HOST: string;
+  NOTIFICATIONS_MICROSERVICE_PORT: number;
 }
 
 const envSchema = Joi.object({
@@ -20,6 +22,8 @@ const envSchema = Joi.object({
   LEADS_MICROSERVICE_PORT: Joi.number().required(),
   DIAGNOSES_MICROSERVICE_HOST: Joi.string().required(),
   DIAGNOSES_MICROSERVICE_PORT: Joi.number().required(),
+  NOTIFICATIONS_MICROSERVICE_HOST: Joi.string().required(),
+  NOTIFICATIONS_MICROSERVICE_PORT: Joi.number().required(),
 }).unknown(true);
 
 const { error, value } = envSchema.validate(process.env);
@@ -38,4 +42,6 @@ export const envs = {
   leadsMicroservicePort: envVars.LEADS_MICROSERVICE_PORT,
   diagnosesMicroserviceHost: envVars.DIAGNOSES_MICROSERVICE_HOST,
   diagnosesMicroservicePort: envVars.DIAGNOSES_MICROSERVICE_PORT,
+  notificationsMicroserviceHost: envVars.NOTIFICATIONS_MICROSERVICE_HOST,
+  notificationsMicroservicePort: envVars.NOTIFICATIONS_MICROSERVICE_PORT,
 };
