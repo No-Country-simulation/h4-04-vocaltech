@@ -6,7 +6,10 @@ import { envs } from '../config/envs';
 export class WhatsAppService {
   private readonly apiUrl = 'https://graph.facebook.com/v14.0'; // URL base de la API de Meta
 
-  constructor() {}
+  constructor() {
+    console.log('Initializing WhatsAppService...');
+    console.log('WhatsApp API URL set successfully.');
+  }
 
   async sendWhatsAppMessage(to: string, message: string): Promise<void> {
     const url = `${this.apiUrl}/${envs.phoneNumberId}/messages`;
